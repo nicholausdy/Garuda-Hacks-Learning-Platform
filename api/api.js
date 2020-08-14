@@ -23,8 +23,12 @@ app.use(bodyParser.json());
 
 // routes
 app.get('/public/createBoard', async (req, res) => {
-  const controller = new BoardController(req, res)
-  await controller.fetchLink()
+  try {
+    const controller = new BoardController(req, res)
+    await controller.fetchLink()
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.name, detail: error.message})
+  }
 });
 
 server.listen(config.port, () => { 
