@@ -37,6 +37,7 @@
     "nodemon": "^2.0.4",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
+    "pm2": "^4.4.0",
     "sequelize": "^6.3.4"
   },
   "devDependencies": {
