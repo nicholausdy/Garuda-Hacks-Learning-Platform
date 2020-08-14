@@ -1,0 +1,47 @@
+{
+  "name": "garudahackslearningplatform",
+  "version": "1.0.0",
+  "description": "Garuda Hacks Learning Platform for peer to peer learning",
+  "main": "./api/api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run nodemon",
+    "dev": "node ./api/api.js",
+    "nodemon": "nodemon --exec npm run dev",
+    "lint": "eslint ./api. ./config/."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholausdy/Garuda-Hacks-Learning-Platform.git"
+  },
+  "keywords": [
+    "learning"
+  ],
+  "author": "nicholausdy <nicdanyos@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicholausdy/Garuda-Hacks-Learning-Platform/issues"
+  },
+  "homepage": "https://github.com/nicholausdy/Garuda-Hacks-Learning-Platform#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.10",
+    "helmet": "^4.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "nats": "^1.4.12",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
