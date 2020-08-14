@@ -22,10 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // routes
-app.get('/public/createBoard', async (req, res) => {
+app.post('/public/createBoard', async (req, res) => {
   try {
     const controller = new BoardController(req, res)
     await controller.fetchLink()
+    await controller.shareBoard()
   } catch (error) {
     return res.status(500).json({ success: false, message: error.name, detail: error.message})
   }
