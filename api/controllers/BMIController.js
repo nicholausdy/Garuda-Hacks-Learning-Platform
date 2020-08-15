@@ -99,7 +99,7 @@ class BMIController {
     }
   }
 
-  static async formatReceivedDates(date) {
+  /* static async formatReceivedDates(date) {
     try {
       const result = []
       const splittedDate = date.split('/')
@@ -114,16 +114,12 @@ class BMIController {
     } catch (error) {
       throw new Error(error.message)
     }
-  }
+  } */
 
   async calculateAgeInMonth() {
     try {
-      const [ formattedDateOfMeasurement, formattedDateOfBirth] = await Promise.all([
-        BMIController.formatReceivedDates(this.req.body.measurement), 
-        BMIController.formatReceivedDates(this.req.body.birth)
-      ])
-      const momentDoM = moment(formattedDateOfMeasurement)
-      const momentDoB = moment(formattedDateOfBirth)
+      const momentDoM = moment(this.req.body.measurement)
+      const momentDoB = moment(this.req.body.birth)
       this.ageInMonth = momentDoM.diff(momentDoB, 'months')
     } catch (error) {
       throw new Error(error.message)
@@ -166,7 +162,11 @@ class BMIController {
         } else { 
           classification = 'Obese'
         }
-        return this.res.status(200).json({ success: true, bmi: this.bmi, classification})
+        return this.res.status(200).json({
+          success: true, 
+          bmi: this.bmi, 
+          classification, 
+          age: Math.round(this.ageInMonth / 12)})
       } 
       let classification
       if (this.bmi < 18.5 ) {
@@ -178,7 +178,11 @@ class BMIController {
       } else {
         classification = 'Obese'
       }
-      return this.res.status(200).json({ success: true, bmi: this.bmi, classification})
+      return this.res.status(200).json({ 
+        success: true, 
+        bmi: this.bmi, 
+        classification,
+        age: Math.round(this.ageInMonth / 12) })
     } catch (error) {
       return this.res.status(500).json({success: false, message: error.name, detail: error.message})
     }
