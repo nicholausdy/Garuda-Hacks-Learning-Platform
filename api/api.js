@@ -58,6 +58,7 @@ app.post('/public/BMIResult', async (req, res) => {
   }
 });
 
-server.listen(config.port, () => { 
-  console.log('Maid cafe is running at '.concat(config.port)); 
-});
+module.exports = app;
+// server.listen(config.port, () => { 
+//  console.log('Maid cafe is running at '.concat(config.port)); 
+// });
