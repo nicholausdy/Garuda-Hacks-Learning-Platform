@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 
 // routes
+// {email: }
 app.post('/public/createBoard', async (req, res) => {
   try {
     const controller = new BoardController(req, res)
@@ -36,10 +37,22 @@ app.post('/public/createBoard', async (req, res) => {
   }
 });
 
+// { file multipart key bmi}
 app.post('/public/uploadBMI', async (req, res) => {
   try {
     const controller = new BMIController(req, res)
     await controller.insertCSVToDB()
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.name, detail: error.message})
+  }
+});
+
+// { weight: , height: , sex: , birth: , measurement: , }
+// height in cm
+app.post('/public/BMIResult', async (req, res) => {
+  try {
+    const controller = new BMIController(req, res)
+    await controller.getClassification()
   } catch (error) {
     return res.status(500).json({ success: false, message: error.name, detail: error.message})
   }
