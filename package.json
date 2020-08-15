@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run nodemon",
-    "dev": "node ./api/api.js",
+    "dev": "node server.js",
     "nodemon": "nodemon --ignore './api/models/bmi/' --exec npm run dev",
     "lint": "eslint ./api. ./config/."
   },
