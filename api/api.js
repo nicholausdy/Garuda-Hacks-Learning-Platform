@@ -1,16 +1,16 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const helmet = require('helmet');
 const cors = require('cors');
 const fileUpload = require('express-fileupload'); 
-
-const config = require('../config/index');
+const fs = require('fs');
+// const config = require('../config/index');
 const BoardController = require('./controllers/BoardController');
 const BMIController = require('./controllers/BMIController');
 
 const app = express()
-const server = http.Server(app);
+// const server = https.Server(app);
 
 app.use(cors());
 
@@ -58,7 +58,8 @@ app.post('/public/BMIResult', async (req, res) => {
   }
 });
 
-module.exports = app;
-// server.listen(config.port, () => { 
-//  console.log('Maid cafe is running at '.concat(config.port)); 
-// });
+https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/apiparenaid.xyz/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/apiparenaid.xyz/fullchain.pem'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/apiparenaid.xyz/chain.pem')
+}, app).listen(443);
