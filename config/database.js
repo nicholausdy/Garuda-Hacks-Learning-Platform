@@ -13,7 +13,7 @@ const db = new Sequelize(
       min: 0,
       idle: 5000, 
     },
-    logging: true,
+    logging: false,
   },
 );
 

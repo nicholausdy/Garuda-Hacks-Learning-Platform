@@ -3,9 +3,11 @@ const express = require('express');
 const http = require('http');
 const helmet = require('helmet');
 const cors = require('cors');
+const fileUpload = require('express-fileupload'); 
 
 const config = require('../config/index');
 const BoardController = require('./controllers/BoardController');
+const BMIController = require('./controllers/BMIController');
 
 const app = express()
 const server = http.Server(app);
@@ -21,12 +23,23 @@ app.use(helmet({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(fileUpload());
+
 // routes
 app.post('/public/createBoard', async (req, res) => {
   try {
     const controller = new BoardController(req, res)
     await controller.fetchLink()
     await controller.shareBoard()
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.name, detail: error.message})
+  }
+});
+
+app.post('/public/uploadBMI', async (req, res) => {
+  try {
+    const controller = new BMIController(req, res)
+    await controller.insertCSVToDB()
   } catch (error) {
     return res.status(500).json({ success: false, message: error.name, detail: error.message})
   }

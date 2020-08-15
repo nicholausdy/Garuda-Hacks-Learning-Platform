@@ -12,6 +12,9 @@ const config = {
   },
   miro: {
     accessToken: process.env.MIRO_ACCESS_TOKEN
+  },
+  directory: {
+    bmiCSV : process.env.BMI_CSV
   }
 
 };
